@@ -24,7 +24,12 @@ app.get("/", (req, res) => {
 const db = require("./models");
 require("./routes/artists.route")(app);
 require("./routes/contracts.route")(app);
-
+require("./routes/contracttypes.route")(app);
+require("./routes/diffusionpartners.route")(app);
+require("./routes/offers.route")(app);
+require("./routes/professions.route")(app);
+require("./routes/professionsectors.route")(app);
+require("./routes/studios.route")(app);
 
 db.sequelize.sync();
 
