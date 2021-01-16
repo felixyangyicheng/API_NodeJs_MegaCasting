@@ -22,7 +22,13 @@ app.get("/", (req, res) => {
 });
 
 const db = require("./models");
+require("./routes/artists.route")(app);
+require("./routes/contracts.route")(app);
+
+
 db.sequelize.sync();
+
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

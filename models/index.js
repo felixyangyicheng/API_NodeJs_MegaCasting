@@ -1,11 +1,13 @@
 const dbConfig = require("../config/db.config.js");
 
 const Sequelize = require("sequelize");
-const { DB } = require("../config/db.config.js");
+const { DB, PORT } = require("../config/db.config.js");
+const { RequestTimeout } = require("http-errors");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   host: dbConfig.HOST,
   dialect: dbConfig.dialect,
-  operatorsAliases: false,
+    operatorsAliases: false,
+  port:PORT,
 
   pool: {
     max: dbConfig.pool.max,
@@ -20,7 +22,13 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.artists = require("./artists.js")(sequelize, Sequelize);
+db.artists = require("./Artists.js")(sequelize, Sequelize);
 db.offers = require("./Offers.js")(sequelize, Sequelize);
+db.contracts = require("./Contracts.js")(sequelize, Sequelize);
+db.contracttypes = require("./ContractTypes")(sequelize, Sequelize);
+db.professions = require("./Professions.js")(sequelize, Sequelize);
+db.professionsectors = require("./ProfessionSectors.js")(sequelize, Sequelize);
+db.studios = require("./Studios.js")(sequelize, Sequelize);
+db.diffusionpartners = require("./DiffusionPartners.js")(sequelize, Sequelize);
 
 module.exports = db;
