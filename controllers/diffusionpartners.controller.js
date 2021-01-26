@@ -1,5 +1,5 @@
 const db = require("../models");
-const DiffusionPartners = db.diffusionPartners;
+const DiffusionPartners = db.diffusionpartners; //must be all lowercases
 const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {

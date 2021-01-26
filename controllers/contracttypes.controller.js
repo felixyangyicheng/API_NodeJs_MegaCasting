@@ -1,5 +1,5 @@
-const db = require("../models");
-const ContractTypes = db.contractTypes;
+const db = require('../models/');
+const ContractTypes = db.contracttypes;
 const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {
