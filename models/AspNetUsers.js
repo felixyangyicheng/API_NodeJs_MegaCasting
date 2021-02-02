@@ -29,6 +29,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     PasswordHash: {
       type: DataTypes.TEXT,
+      set(val) {
+        return require('bcrypt').hashSync(val, 10)
+      },
       allowNull: true
     },
     SecurityStamp: {

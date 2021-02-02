@@ -1,5 +1,5 @@
 const db = require('../models');
-const ProfessionSectors = db.professionSectors;
+const ProfessionSectors = db.professionsectors;
 const Op = db.Sequelize.Op;
 
 exports.findAll = (req, res) => {

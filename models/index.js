@@ -30,5 +30,8 @@ db.professions = require("./Professions.js")(sequelize, Sequelize);
 db.professionsectors = require("./ProfessionSectors.js")(sequelize, Sequelize);
 db.studios = require("./Studios.js")(sequelize, Sequelize);
 db.diffusionpartners = require("./DiffusionPartners.js")(sequelize, Sequelize);
+db.aspnetusers = require("./AspNetUsers.js")(sequelize, Sequelize);
+db.aspnetroles = require("./AspNetRoles.js")(sequelize, Sequelize);
+db.aspnetuserroles = require("./AspNetUserRoles.js")(sequelize, Sequelize);
 
 module.exports = db;
