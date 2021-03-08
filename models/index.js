@@ -34,4 +34,6 @@ db.aspnetusers = require("./AspNetUsers.js")(sequelize, Sequelize);
 db.aspnetroles = require("./AspNetRoles.js")(sequelize, Sequelize);
 db.aspnetuserroles = require("./AspNetUserRoles.js")(sequelize, Sequelize);
 
+db.ROLES = ["user", "subcriber"];
+
 module.exports = db;

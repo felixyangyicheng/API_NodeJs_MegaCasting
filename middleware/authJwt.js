@@ -3,7 +3,7 @@ const config = require("../config/auth.config.js");
 const db = require("../models");
 const AspnetUsers = db.aspnetusers;
 
-verifyToken = (req, res, next) => {
+function verifyToken  (req, res, next) {
   let token = req.headers["x-access-token"];
 
   if (!token) {
@@ -23,7 +23,7 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isAdmin = (req, res, next) => {
+function isAdmin  (req, res, next)  {
   AspnetUsers.findByPk(req.Id).then(aspnetusers => {
     aspnetusers.findByPk(req.Id).then(roles => {
       for (let i = 0; i < roles.length; i++) {
@@ -41,7 +41,7 @@ isAdmin = (req, res, next) => {
   });
 };
 
-isPartner = (req, res, next) => {
+function isPartner  (req, res, next)  {
   AspnetUsers.findByPk(req.Id).then(user => {
     user.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
@@ -58,9 +58,9 @@ isPartner = (req, res, next) => {
   });
 };
 
-isPartnerOrAdmin = (req, res, next) => {
-  User.findByPk(req.userId).then(user => {
-    user.getRoles().then(roles => {
+function isPartnerOrAdmin  (req, res, next) {
+  AspnetUsers.findByPk(req.userId).then(user => {
+    AspnetUsers.getRoles().then(roles => {
       for (let i = 0; i < roles.length; i++) {
         if (roles[i].name === "Partner") {
           next();
@@ -86,4 +86,4 @@ const authJwt = {
   isPartner: isPartner,
   isPartnerOrAdmin: isPartnerOrAdmin
 };
-module.exports = authJwt;
+module.exports = authJwt ;

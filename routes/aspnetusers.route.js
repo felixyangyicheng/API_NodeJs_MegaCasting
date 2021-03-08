@@ -1,6 +1,6 @@
 module.exports = app => {
   const aspnetusers = require("../controllers/aspnetusers.controller.js");
-
+  const { authJwt } = require("../middleware");
   var router = require("express").Router();
 
 

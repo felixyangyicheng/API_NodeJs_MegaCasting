@@ -76,6 +76,8 @@ function initModels(sequelize) {
     __EFMigrationsHistory,
   };
 }
+
+
 module.exports = initModels;
 module.exports.initModels = initModels;
 module.exports.default = initModels;

@@ -2,6 +2,24 @@ const db = require("../models");
 const AspNetUsers = db.aspnetusers;
 const Op = db.Sequelize.Op;
 
+
+exports.allAccess = (req, res) => {
+  res.status(200).send("Public Content.");
+};
+
+exports.customerBoard = (req, res) => {
+  res.status(200).send("Customer Content.");
+};
+
+exports.adminBoard = (req, res) => {
+  res.status(200).send("Admin Content.");
+};
+
+exports.partnerBoard = (req, res) => {
+  res.status(200).send("Partner Content.");
+};
+
+
 exports.findAll = (req, res) => {
     AspNetUsers.findAll()
         .then(data => {

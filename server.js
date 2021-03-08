@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const app = express();
 const users= require("./models/AspNetUsers")
 var corsOptions = {
@@ -38,6 +38,8 @@ require("./routes/professions.route")(app);
 require("./routes/professionsectors.route")(app);
 require("./routes/studios.route")(app);
 require("./routes/aspnetusers.route")(app);
+require('./routes/auth.route')(app);
+require('./routes/user.route')(app);
 
 db.sequelize.sync();
 

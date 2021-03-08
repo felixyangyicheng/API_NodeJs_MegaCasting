@@ -1,9 +1,9 @@
 const db = require("../models");
-const AspnetRoles = db.aspnetroles;
+const ROLES = db.ROLES;
 const AspnetUsers = db.aspnetusers;
-const AspnetUserRoles = db.aspnetuserroles;
 
-checkDuplicateUsernameOrEmail = (req, res, next) => {
+
+ checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
     AspnetUsers.findOne({
     where: {
@@ -16,11 +16,8 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
       });
       return;
       }
-    AspnetUsers.findOne({
-      where: {
-        Email: req.body.Email
-      }
-    }).then(aspnetusers => {
+    AspnetUsers.findOne({where: {Email: req.body.Email}})
+        .then(aspnetusers => {
       if (aspnetusers) {
         res.status(400).send({
           message: "Failed! Email is already in use!"
@@ -34,16 +31,16 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
 };
 
 checkRolesExisted = (req, res, next) => {
-    AspnetRoles.findOne({
-        where: {
-          Name: req.body.Name
+  if (req.body.roles) {
+    for (let i = 0; i < req.body.roles.length; i++) {
+      if (!ROLES.includes(req.body.roles[i])) {
+        res.status(400).send({
+          message: "Failed! Role does not exist = " + req.body.roles[i]
+        });
+        return;
       }
-  }).then(aspnetroles => {
-    if (!aspnetroles) {
-      res.status(400).send({
-        message: "Failed! Role does not exist = " + req.body.Name
-      });
-      return;
+    }
+  }
   
   next();
 };
@@ -53,4 +50,4 @@ const verifySignUp = {
   checkRolesExisted: checkRolesExisted
 };
 
-module.exports = verifySignUp;
+module.exports = verifySignUp; 
