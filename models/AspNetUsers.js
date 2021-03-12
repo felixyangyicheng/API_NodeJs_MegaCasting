@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
+const bcrypt = require("bcrypt");
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('AspNetUsers', {
+  const AspNetUsers= sequelize.define('AspNetUsers', {
     Id: {
       type: DataTypes.STRING(255),
       allowNull: false,
@@ -96,4 +97,7 @@ module.exports = function(sequelize, DataTypes) {
       },
     ]
   });
+  
+  
+  return AspNetUsers;
 };

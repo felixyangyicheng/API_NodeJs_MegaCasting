@@ -5,7 +5,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 const bcrypt = require('bcrypt');
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+const expressSwagger = require('express-swagger-generator')(app);
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users.route');
 
@@ -40,5 +42,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

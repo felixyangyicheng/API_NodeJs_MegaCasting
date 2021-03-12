@@ -1,6 +1,13 @@
 const db = require("../models");
 const AspNetUsers = db.aspnetusers;
+const AspNetRoles = db.aspnetroles;
+const AspNetUserRoles = db.aspnetuserroles;
+
 const Op = db.Sequelize.Op;
+
+AspNetRoles.belongsToMany(AspNetUsers, { through: AspNetUserRoles, foreignKey: "RoleId", otherKey: "UserId" });
+AspNetUsers.belongsToMany(AspNetRoles, { through: AspNetUserRoles, foreignKey: "UserId", otherKey: "RoleId" });
+
 
 
 exports.allAccess = (req, res) => {
@@ -21,7 +28,18 @@ exports.partnerBoard = (req, res) => {
 
 
 exports.findAll = (req, res) => {
-    AspNetUsers.findAll()
+  AspNetUsers.findAll({
+    include: [
+      {
+        model: AspNetRoles,
+        as:'AspNetRoles',
+        attributes: ["Name"],
+        through: {
+          attributes: [],
+          }
+        },
+      ],
+    })
         .then(data => {
             res.send(data);
         })
@@ -33,15 +51,25 @@ exports.findAll = (req, res) => {
         });
 };
 
-exports.create = (req, res) => {
+// exports.create = (req, res) => {
     
-};
+// };
 
-// Find a single Tutorial with an id
+
 exports.findOne = (req, res) => {
   const Id = req.params.Id;
 
-  AspNetUsers.findByPk(Id)
+  AspNetUsers.findByPk(Id, {
+    include: [
+      {
+        model: AspNetRoles,
+        as:'AspNetRoles',
+        attributes: ["Name"],
+        through: {
+          attributes: [],
+          }
+        },
+      ],})
     .then(data => {
       res.send(data);
     })
@@ -55,7 +83,17 @@ exports.findOne = (req, res) => {
 exports.find = (req, res) => {
   const UserName = req.params.UserName;
 
-  AspNetUsers.findByName(UserName)
+  AspNetUsers.findByName(UserName, {
+    include: [
+      {
+        model: AspNetRoles,
+        as:'AspNetRoles',
+        attributes: ["Name"],
+        through: {
+          attributes: [],
+          }
+        },
+      ],})
     .then(data => {
       res.send(data);
     })
@@ -66,27 +104,24 @@ exports.find = (req, res) => {
     });
 };
 
-// Update a Tutorial by the id in the request
-exports.update = (req, res) => {
-    const Id = req.params.Id;
-    AspNetUsers.update(req.body, {
-        where: { Id: Id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Utilisateur mis à jour"
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-               message: "erreur de l'utilisateur avec id=" + Id
-            });
-        });
-};
 
-// Delete a Tutorial with the specified id in the request
-exports.delete = (req, res) => {
-  
-};
+
+// exports.update = (req, res) => {
+//     const Id = req.params.Id;
+//     AspNetUsers.update(req.body, {
+//         where: { Id: Id }
+//     })
+//         .then(num => {
+//             if (num == 1) {
+//                 res.send({
+//                     message: "Utilisateur mis à jour"
+//                 });
+//             }
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//                message: "erreur de l'utilisateur avec id=" + Id
+//             });
+//         });
+// };
+

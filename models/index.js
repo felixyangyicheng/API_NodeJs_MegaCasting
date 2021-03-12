@@ -34,6 +34,15 @@ db.aspnetusers = require("./AspNetUsers.js")(sequelize, Sequelize);
 db.aspnetroles = require("./AspNetRoles.js")(sequelize, Sequelize);
 db.aspnetuserroles = require("./AspNetUserRoles.js")(sequelize, Sequelize);
 
-db.ROLES = ["user", "subcriber"];
+// db.aspnetusers.belongsToMany(db.aspnetroles, {
+//   through: "aspnetuserroles",
+//   as: "aspnetusers",
+//   foreignKey: "UserId",
+// });
+// db.aspnetroles.belongsToMany(db.aspnetusers, {
+//   through: "aspnetuserroles",
+//   as: "aspnetroles",
+//   foreignKey: "RoleId",
+// });
 
 module.exports = db;

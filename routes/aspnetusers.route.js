@@ -5,8 +5,8 @@ module.exports = app => {
 
 
   // Retrieve all contracts
-  router.get("/", aspnetusers.findAll);
-  router.get("/username", aspnetusers.find);
+  router.get("/", [authJwt.verifyToken], aspnetusers.findAll);
+  router.get("/username", [authJwt.verifyToken], aspnetusers.find);
 
   app.use('/api/aspnetusers', router);
 };

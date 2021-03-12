@@ -25,5 +25,10 @@
     "pug": "^3.0.0",
     "sequelize": "^6.3.5",
     "standard": "^16.0.3"
+  },
+  "devDependencies": {
+    "express-swagger-generator": "^1.1.17",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   }
 }
