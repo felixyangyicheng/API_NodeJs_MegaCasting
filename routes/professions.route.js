@@ -1,13 +1,12 @@
-
 module.exports = app => {
-  const professions = require("../controllers/professions.controller.js");
-  const { authJwt } = require("../middleware");
-  var router = require("express").Router();
+    const professions = require("../controllers/professions.controller.js");
+    const { authJwt } = require("../middleware");
+    var router = require("express").Router();
 
 
-  // Retrieve all professions
-  router.get("/", [authJwt.verifyToken], professions.findAll);
+    // Retrieve all professions
+    router.get("/", [authJwt.verifyToken], professions.findAll);
+    router.get("/:id", [authJwt.verifyToken], professions.findOne);
 
-
-  app.use('/api/professions', router);
+    app.use('/api/professions', router);
 };

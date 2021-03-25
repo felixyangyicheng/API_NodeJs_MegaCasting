@@ -1,13 +1,12 @@
-
 module.exports = app => {
-  const contracttypes = require("../controllers/contracttypes.controller.js");
-  const { authJwt } = require("../middleware");
-  var router = require("express").Router();
+    const contracttypes = require("../controllers/contracttypes.controller.js");
+    const { authJwt } = require("../middleware");
+    var router = require("express").Router();
 
 
-  // Retrieve all contracttypes
-  router.get("/",  contracttypes.findAll);
+    // /contracttypes?ContratTypeName=*
+    router.get("/", [authJwt.verifyToken], contracttypes.findAll);
 
-
-  app.use('/api/contracttypes', router);
+    router.get("/:id", [authJwt.verifyToken], contracttypes.findOne);
+    app.use('/api/contracttypes', router);
 };
