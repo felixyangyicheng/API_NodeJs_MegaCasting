@@ -19,10 +19,45 @@ exports.findAll = (req, res) => {
             });
         });
 };
+
+exports.findAllByDuration = (req, res) => {
+    const OfferDuration = req.query.OfferDuration;
+    var condition = OfferDuration ? {
+        OfferDuration: {
+            [Op.like]: `%${OfferDuration}%`
+        }
+    } : null;
+    Offers.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Une erreur s'est produite lors de la recherhce des offres."
+            });
+        });
+};
+exports.findAllByLocation = (req, res) => {
+    const Location = req.query.Location;
+    var condition = Location ? {
+        Location: {
+            [Op.like]: `%${Location}%`
+        }
+    } : null;
+    Offers.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Une erreur s'est produite lors de la recherhce des offres."
+            });
+        });
+};
 exports.findOne = (req, res) => {
     const OfferId = req.params.OfferId;
 
-    Tutorial.findByPk(OfferId)
+    Offers.findByPk(OfferId)
         .then(data => {
             res.send(data);
         })

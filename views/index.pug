@@ -2,4 +2,44 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  h1 Bienvenu sur API MegaCasting! #{title}
+  h2 Instruction d'utilisation: 
+  h3 - Login 
+  p   -Post /api/auth/login pour se connecter. 
+  p     exemple de body: {UserName:"String", PasswordHash:"PWD"}
+  p
+  h3 - Artistes 
+  p   -Get /api/artists/                                           ---- Liste de tous les artistes.
+  p   -Get /api/artists/{ArtistId}                                 ---- Trouver l'artiste avec ArtistId = {ArtistId}.
+  p   -Get /api/artists?FirstName={FirstName}                      ---- Filtre:Prenom, Liste de tous les artistes qui s'appellent {FirstName}.
+  p   -Get /api/artists/lastname?LastName={LastName}               ---- Filtre:Nom Famille, Liste de tous les artistes qui s'appellent {LastName}.
+  p   -Get /api/artists/artistname?ArtistName={ArtistName}         ---- Filtre:Pseudonyme d'artiste, Liste de tous les artistes qui s'appellent {ArtistName}.
+  
+  h3 - Contrats 
+  p   -Get /api/contracts/                                         ---- Liste de tous les contrats.
+  p   -Get /api/contracts/{ContractId}                             ---- Trouver le contrat avec ContractId = {ContractId}.
+  p   -Get /api/contracts/contractreference?ContractReference={ContractReference} ----Filtre:Référence de contrat, Contrat avec la reférence {ContractReference}
+  p
+  h3 - Types de contrat 
+  p   -Get /api/contracttypes/                                     ---- Liste de tous les types de contrat.
+  p   -Get /api/contracttypes/{ContractTypeId}                     ---- Trouver le type avec ContratTypeId = {ContratTypeId}.
+  p   -Get /api/contracttypes?ContractTypeName={ContractTypeName}  ---- Filtre:Libellé de type de contrat, Liste de tous les types de contrat.
+  p
+  h3 - Offres 
+  p   -Get /api/offers/                                            ---- Liste de toutes les offres.
+  p   -Get /api/offers/{OfferId}                                    ---- L'offre avec OffreId={OffreId}.
+  p   -Get /api/offers?Title={Title}                               ---- Filtre:Titre de l'offre, L'offre avec Title={Title}.
+  p   -Get /api/offers/offerduration?OfferDuration={OfferDuration} ---- Filtre:Durée d'offre, Liste des offres avec une durée (jour)                           
+  p   -Get /api/offers/location?Location={Location}                ---- Filtre:Localisation d'offre, Liste des offres dans localisation ={localisation}
+
+  p 
+  h3 - Professions
+  p   -Get /api/professions/ ---- Liste de toutes les professions  
+  p   -Get /api/professions/{ProfessionId}  ---- Profession avec id ={ProfessionId}
+  p   -Get /api/professions?ProfessionName={ProfessionName} ---- Filtre:Libellé de profession
+  p 
+  h3 - Secteurs de profession
+  p   -Get /api/professionsectors/                                 ---- Liste de tous les secteur de profession
+  p   -Get /api/professionsectors/{ProfessionSectorId}   ---- Secteur de profession avec id ={ProfessionSectorId}
+  p   -Get /api/professionsectors?SectorName={SectorName}         ---- Filtre:Libellé de secteur de profession
+  p 

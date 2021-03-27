@@ -4,10 +4,14 @@ module.exports = app => {
     var router = require("express").Router();
 
 
-    // Retrieve all artists
+    // Retrieve all artists  artists?FirstName=*  [authJwt.verifyToken],
     router.get("/", [authJwt.verifyToken], artists.findAll);
+
+    router.get("/artistname", [authJwt.verifyToken], artists.findAllByArtistName);
+    router.get("/lastname", [authJwt.verifyToken], artists.findAllByLastName);
+
     // Retrieve a single Tutorial with id
-    router.get("/:id", [authJwt.verifyToken], artists.findOne);
+    router.get("/:ArtistId", artists.findOne);
 
     app.use('/api/artists', router);
 };

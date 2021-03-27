@@ -4,9 +4,10 @@ module.exports = app => {
     var router = require("express").Router();
 
 
-    // Retrieve all contracts
+    // Retrieve all contracts 
     router.get("/", [authJwt.verifyToken], contracts.findAll);
-    router.get("/:id", [authJwt.verifyToken], contracts.findOne);
+    router.get("/contractreference", [authJwt.verifyToken], contracts.findAllByReference);
+    router.get("/:ContractId", [authJwt.verifyToken], contracts.findOne);
 
     app.use('/api/contracts', router);
 };

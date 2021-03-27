@@ -22,7 +22,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const DiffusionPartnerId = req.params.DiffusionPartnerId;
 
-    Tutorial.findByPk(DiffusionPartnerId)
+    DiffusionPartners.findByPk(DiffusionPartnerId)
         .then(data => {
             res.send(data);
         })

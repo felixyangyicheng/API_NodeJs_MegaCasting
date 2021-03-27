@@ -23,7 +23,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const ContractTypeId = req.params.ContractTypeId;
 
-    Tutorial.findByPk(ContractTypeId)
+    ContractTypes.findByPk(ContractTypeId)
         .then(data => {
             res.send(data);
         })

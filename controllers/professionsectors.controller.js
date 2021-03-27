@@ -22,7 +22,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const ProfessionSectorId = req.params.ProfessionSectorId;
 
-    Tutorial.findByPk(ProfessionSectorId)
+    ProfessionSectors.findByPk(ProfessionSectorId)
         .then(data => {
             res.send(data);
         })

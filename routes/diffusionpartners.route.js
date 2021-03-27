@@ -6,7 +6,7 @@ module.exports = app => {
 
     // Retrieve all diffusionpartners
     router.get("/", [authJwt.verifyToken], diffusionpartners.findAll);
-    router.get("/:id", [authJwt.verifyToken], diffusionpartners.findOne);
+    router.get("/:DiffusionPartnerId", [authJwt.verifyToken], diffusionpartners.findOne);
 
     app.use('/api/diffusionpartners', router);
 };

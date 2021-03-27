@@ -14,10 +14,28 @@ exports.findAll = (req, res) => {
             });
         });
 };
+
+exports.findAllByReference = (req, res) => {
+    const ContractReference = req.query.ContractReference;
+    var condition = ContractReference ? {
+        ContractReference: {
+            [Op.like]: `%${ContractReference}%`
+        }
+    } : null
+    Contracts.findAll({ where: condition })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Une erreur s'est produite lors de la recherche des contrats."
+            });
+        });
+};
 exports.findOne = (req, res) => {
     const ContractId = req.params.id;
 
-    Tutorial.findByPk(ContractId)
+    Contracts.findByPk(ContractId)
         .then(data => {
             res.send(data);
         })

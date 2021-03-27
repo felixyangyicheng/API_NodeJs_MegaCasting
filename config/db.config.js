@@ -1,9 +1,9 @@
 module.exports = {
     PORT: 3307,
-    HOST: "172.16.1.114",
+    HOST: "localhost",
     USER: "root",
     PASSWORD: "123456",
-    DB: "mysql-megasolution",
+    DB: "megasolution",
     dialect: "mysql",
     pool: {
         max: 5,

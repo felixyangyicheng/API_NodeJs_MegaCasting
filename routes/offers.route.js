@@ -6,7 +6,9 @@ module.exports = app => {
 
     // Retrieve all offers
     router.get("/", [authJwt.verifyToken], offers.findAll);
-    router.get("/:id", [authJwt.verifyToken], offers.findOne);
+    router.get("/offerduration", [authJwt.verifyToken], offers.findAllByDuration);
+    router.get("/location", [authJwt.verifyToken], offers.findAllByLocation);
+    router.get("/:OfferId", [authJwt.verifyToken], offers.findOne);
 
     app.use('/api/offers', router);
 };
