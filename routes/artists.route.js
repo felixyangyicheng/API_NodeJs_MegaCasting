@@ -11,7 +11,7 @@ module.exports = app => {
     router.get("/lastname", [authJwt.verifyToken], artists.findAllByLastName);
 
     // Retrieve a single Tutorial with id
-    router.get("/:ArtistId", artists.findOne);
+    router.get("/:ArtistId", [authJwt.verifyToken], artists.findOne);
 
     app.use('/api/artists', router);
 };
