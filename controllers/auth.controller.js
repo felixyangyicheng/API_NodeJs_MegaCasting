@@ -151,6 +151,7 @@ exports.SignInBoard = (req, res) => {
 
 function verifyRole(db) {
     if (db == "[{\"Name\":\"Partner\"}]") return true;
+    else if (db == "[{\"Name\":\"Administrator\"}]") return true;
     else return false;
 }
 
