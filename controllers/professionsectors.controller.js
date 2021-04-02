@@ -1,6 +1,12 @@
 const db = require('../models');
 const ProfessionSectors = db.professionsectors;
+const Professions = db.professions;
 const Op = db.Sequelize.Op;
+
+ProfessionSectors.hasMany(Professions, {
+    foreignKey: 'ProfessionSectorId'
+});
+Professions.belongsTo(ProfessionSectors);
 
 exports.findAll = (req, res) => {
     const SectorName = req.query.SectorName;
@@ -9,7 +15,14 @@ exports.findAll = (req, res) => {
             [Op.like]: `%${SectorName}%`
         }
     } : null;
-    ProfessionSectors.findAll({ where: condition })
+    ProfessionSectors.findAll({
+            where: condition,
+            include: [{
+                model: Professions,
+                as: 'Professions',
+                attributes: ["ProfessionName"]
+            }, ],
+        }, )
         .then(data => {
             res.send(data);
         })

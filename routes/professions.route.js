@@ -4,8 +4,8 @@ module.exports = app => {
     var router = require("express").Router();
 
 
-    // Retrieve all professions
-    router.get("/", [authJwt.verifyToken], professions.findAll);
+    // Retrieve all professions [authJwt.verifyToken],
+    router.get("/", professions.findAll);
     router.get("/:ProfessionId", [authJwt.verifyToken], professions.findOne);
 
     app.use('/api/professions', router);

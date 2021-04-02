@@ -1,6 +1,12 @@
 const db = require("../models");
 const Professions = db.professions;
+const Offers = db.offers;
 const Op = db.Sequelize.Op;
+
+Professions.hasMany(Offers, {
+    foreignKey: 'ProfessionId'
+});
+Offers.belongsTo(Professions);
 
 exports.findAll = (req, res) => {
     const ProfessionName = req.query.ProfessionName;
@@ -9,7 +15,16 @@ exports.findAll = (req, res) => {
             [Op.like]: `%${ProfessionName}%`
         }
     } : null;
-    Professions.findAll({ where: condition })
+
+    Professions.findAll({
+            attributes: ["ProfessionId", "ProfessionName"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            where: condition,
+            include: [{
+                model: Offers,
+                as: 'Offers',
+                attributes: ["OfferReference"]
+            }, ],
+        })
         .then(data => {
             res.send(data);
         })
@@ -18,7 +33,10 @@ exports.findAll = (req, res) => {
                 message: err.message || "Une erreur s'est produite lors de la recherche des professions."
             });
         });
+    console.log(Professions);
 };
+
+
 exports.findOne = (req, res) => {
     const ProfessionId = req.params.ProfessionId;
 
@@ -30,5 +48,5 @@ exports.findOne = (req, res) => {
             res.status(500).send({
                 message: "Une erreur s'est produite lors de la recherche de profession avec id=" + id
             });
-        });
+        })
 };

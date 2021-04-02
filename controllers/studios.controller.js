@@ -1,6 +1,12 @@
 const db = require("../models");
 const Studios = db.studios;
+const Offers = db.offers;
 const Op = db.Sequelize.Op;
+
+Studios.hasMany(Offers, {
+    foreignKey: 'StudioId'
+});
+Offers.belongsTo(Studios);
 
 exports.findAll = (req, res) => {
     const StudioName = req.query.StudioName;
@@ -9,7 +15,17 @@ exports.findAll = (req, res) => {
             [Op.like]: `%${StudioName}%`
         }
     } : null;
-    Studios.findAll({ where: condition })
+    Studios.findAll({
+            attributes: [
+                "StudioId", "StudioName", "PostCode", "City", "Siret", "Address", "AddressNumber", "Phone", "Email",
+            ],
+            where: condition,
+            include: [{
+                model: Offers,
+                as: 'Offers',
+                attributes: ["OfferReference"]
+            }]
+        })
         .then(data => {
             res.send(data);
         })

@@ -5,8 +5,8 @@ module.exports = app => {
     var router = require("express").Router();
 
 
-    // Retrieve all studios
-    router.get("/", [authJwt.verifyToken], studios.findAll);
+    // Retrieve all studios  [authJwt.verifyToken],
+    router.get("/", studios.findAll);
 
     router.get("/:id", [authJwt.verifyToken], studios.findOne);
     app.use('/api/studios', router);
