@@ -1,12 +1,14 @@
 module.exports = app => {
-  const aspnetusers = require("../controllers/aspnetusers.controller.js");
-  const { authJwt } = require("../middleware");
-  var router = require("express").Router();
+    const aspnetusers = require("../controllers/aspnetusers.controller.js");
+    const { authJwt } = require("../middleware");
+    var router = require("express").Router();
 
 
-  // Retrieve all contracts
-  router.get("/", [authJwt.verifyToken], aspnetusers.findAll);
-  router.get("/username", [authJwt.verifyToken], aspnetusers.find);
+    // Retrieve all contracts [authJwt.verifyToken],
+    // router.get("/", aspnetusers.findAll);
+    // router.get("/username", aspnetusers.findName);
+    // router.get("/id", aspnetusers.findId);
 
-  app.use('/api/aspnetusers', router);
+
+    app.use('/api/aspnetusers', router);
 };

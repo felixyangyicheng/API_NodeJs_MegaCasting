@@ -11,97 +11,92 @@ AspNetUsers.belongsToMany(AspNetRoles, { through: AspNetUserRoles, foreignKey: "
 
 
 exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
+    res.status(200).send("Public Content.");
 };
 
 exports.customerBoard = (req, res) => {
-  res.status(200).send("Customer Content.");
+    res.status(200).send("Customer Content.");
 };
 
 exports.adminBoard = (req, res) => {
-  res.status(200).send("Admin Content.");
+    res.status(200).send("Admin Content.");
 };
 
 exports.partnerBoard = (req, res) => {
-  res.status(200).send("Partner Content.");
+    res.status(200).send("Partner Content.");
 };
 
 
 exports.findAll = (req, res) => {
-  AspNetUsers.findAll({
-    include: [
-      {
-        model: AspNetRoles,
-        as:'AspNetRoles',
-        attributes: ["Name"],
-        through: {
-          attributes: [],
-          }
-        },
-      ],
-    })
+    AspNetUsers.findAll({
+            include: [{
+                model: AspNetRoles,
+                as: 'AspNetRoles',
+                attributes: ["Name"],
+                through: {
+                    attributes: [],
+                }
+            }, ],
+        })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "some error occured while retrieving users."
+                message: err.message || "some error occured while retrieving users."
             });
         });
 };
 
-// exports.create = (req, res) => {
-    
-// };
 
 
-exports.findOne = (req, res) => {
-  const Id = req.params.Id;
+exports.findId = (req, res) => {
+    const Id = req.query.Id;
 
-  AspNetUsers.findByPk(Id, {
-    include: [
-      {
-        model: AspNetRoles,
-        as:'AspNetRoles',
-        attributes: ["Name"],
-        through: {
-          attributes: [],
-          }
-        },
-      ],})
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Erreur lors de la recherche de l'Utilisateur avec id=" + Id
-      });
-    });
+
+    AspNetUsers.findOne({
+            where: { Id: Id },
+            include: [{
+                model: AspNetRoles,
+                as: 'AspNetRoles',
+                attributes: ["Name"],
+                through: {
+                    attributes: [],
+                }
+            }, ],
+        })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Erreur lors de la recherche de l'Utilisateur avec id=" + Id
+            });
+        });
 };
 
-exports.find = (req, res) => {
-  const UserName = req.params.UserName;
-
-  AspNetUsers.findByName(UserName, {
-    include: [
-      {
-        model: AspNetRoles,
-        as:'AspNetRoles',
-        attributes: ["Name"],
-        through: {
-          attributes: [],
-          }
-        },
-      ],})
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Erreur lors de la recherche de l'Utilisateur avec UserName=" + UserName
-      });
-    });
+exports.findName = (req, res) => {
+    const UserName = req.query.UserName;
+    // query for finOne(), params for findByPk
+    AspNetUsers.findOne({
+            where: { UserName: UserName },
+            include: [{
+                model: AspNetRoles,
+                as: 'AspNetRoles',
+                attributes: ["Name"],
+                through: {
+                    attributes: [],
+                }
+            }, ],
+        })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Erreur lors de la recherche de l'Utilisateur avec UserName=" + UserName
+            });
+        });
 };
 
 
@@ -124,4 +119,3 @@ exports.find = (req, res) => {
 //             });
 //         });
 // };
-
