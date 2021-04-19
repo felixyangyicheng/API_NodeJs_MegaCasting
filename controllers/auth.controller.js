@@ -33,8 +33,8 @@ for (let i = 1; i < hashedPasswordBytes.length; i++) {
 }
 
 // password provided by the user        
-const password = 'P@ssword1';
-
+//const password = 'P@ssword1';
+const password = 'ssword1';
 var nodeCrypto = crypto.pbkdf2Sync(
     new Buffer(password),
     new Buffer(salt_string, 'hex'), 10000, 256, 'SHA256');
@@ -196,7 +196,7 @@ exports.signin = (req, res) => {
                 })
             }
             var token = jwt.sign({ Id: AspNetUsers.Id }, config.secret, {
-                expiresIn: 86400 // 24 hours
+                expiresIn: 3888000 // 24 hours *45
             });
             res.status(200).send({
                 Id: AspNetUsers.Id,
