@@ -5,7 +5,7 @@ module.exports = app => {
 
 
     // Retrieve all professions [authJwt.verifyToken],
-    router.get("/", professions.findAll);
+    router.get("/", [authJwt.verifyToken], professions.findAll);
     router.get("/:ProfessionId", [authJwt.verifyToken], professions.findOne);
 
     app.use('/api/professions', router);

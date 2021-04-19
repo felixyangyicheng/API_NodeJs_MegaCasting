@@ -9,7 +9,10 @@ exports.findAll = (req, res) => {
             [Op.like]: `%${Title}%`
         }
     } : null;
-    Offers.findAll({ where: condition })
+    Offers.findAll({
+            attributes: ["OfferId", "OfferReference"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            where: condition
+        })
         .then(data => {
             res.send(data);
         })
