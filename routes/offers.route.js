@@ -5,7 +5,7 @@ module.exports = app => {
 
 
     // Retrieve all offers [authJwt.verifyToken],
-    router.get("/", offers.findAll);
+    router.get("/", [authJwt.verifyToken], offers.findAll);
     router.get("/offerduration", [authJwt.verifyToken], offers.findAllByDuration);
     router.get("/location", [authJwt.verifyToken], offers.findAllByLocation);
     router.get("/:OfferId", [authJwt.verifyToken], offers.findOne);

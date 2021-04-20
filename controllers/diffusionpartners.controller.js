@@ -9,7 +9,7 @@ exports.findAll = (req, res) => {
             [Op.like]: `%${DiffusionPartnerName}%`
         }
     } : null;
-    DiffusionPartners.findAll({ where: condition })
+    DiffusionPartners.findAll({ attributes: ["DiffusionPartnerId", "DiffusionPartnerName"], where: condition })
         .then(data => {
             res.send(data);
         })

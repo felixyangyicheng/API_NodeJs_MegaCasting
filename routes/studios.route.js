@@ -6,7 +6,7 @@ module.exports = app => {
 
 
     // Retrieve all studios  [authJwt.verifyToken],
-    router.get("/", studios.findAll);
+    router.get("/", [authJwt.verifyToken], studios.findAll);
 
     router.get("/:id", [authJwt.verifyToken], studios.findOne);
     app.use('/api/studios', router);
