@@ -14,7 +14,7 @@
 // };
 
 module.exports = {
-    PORT: 3307,
+    PORT: 3306,
     HOST: "172.16.1.114",
     USER: "root",
     PASSWORD: "123456",
