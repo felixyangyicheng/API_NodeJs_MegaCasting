@@ -3,8 +3,10 @@ const Offers = db.offers;
 const Studios = db.studio;
 const Op = db.Sequelize.Op;
 
-Studios.hasMany(Offers, { foreignKey: "StudioId" });
-Offers.belongsTo(Studios);
+// Studios.hasMany(Offers, {
+//     foreignKey: "StudioId"
+// });
+// Offers.belongsTo(Studios);
 
 exports.findAll = (req, res) => {
     const Title = req.query.Title;
@@ -14,7 +16,7 @@ exports.findAll = (req, res) => {
         }
     } : null;
     Offers.findAll({
-            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioName"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioId"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
             where: condition
         })
         .then(data => {
