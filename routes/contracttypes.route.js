@@ -7,6 +7,6 @@ module.exports = app => {
     // /contracttypes?ContratTypeName=*
     router.get("/", [authJwt.verifyToken], contracttypes.findAll);
 
-    router.get("/:ContratTypeId", [authJwt.verifyToken], contracttypes.findOne);
+    router.get("/:ContractTypeId", [authJwt.verifyToken], contracttypes.findOne);
     app.use('/api/contracttypes', router);
 };

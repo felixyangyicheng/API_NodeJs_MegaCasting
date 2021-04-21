@@ -33,7 +33,7 @@ exports.findAllByReference = (req, res) => {
         });
 };
 exports.findOne = (req, res) => {
-    const ContractId = req.params.id;
+    const ContractId = req.params.ContractTypeId;
 
     Contracts.findByPk(ContractId)
         .then(data => {
@@ -41,7 +41,7 @@ exports.findOne = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Une erreur s'est produite lors de la recherche de contrat avec id=" + id
+                message: "Une erreur s'est produite lors de la recherche de contrat avec id=" + ContractTypeId
             });
         });
 };

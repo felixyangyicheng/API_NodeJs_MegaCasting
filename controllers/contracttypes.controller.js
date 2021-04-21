@@ -29,7 +29,7 @@ exports.findOne = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Une erreur s'est produite lors de la recherche avec id=" + id
+                message: "Une erreur s'est produite lors de la recherche avec id=" + ContractTypeId
             });
         });
 };

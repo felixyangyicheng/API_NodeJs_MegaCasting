@@ -44,7 +44,7 @@ exports.findOne = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Une erreur s'est produite lors de la recherche de studio avec id=" + id
+                message: "Une erreur s'est produite lors de la recherche de studio avec id=" + StudioId
             });
         });
 };

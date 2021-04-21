@@ -41,7 +41,7 @@ exports.findOne = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Une erreur s'est produite lors de la recherche de secteur avec id=" + id
+                message: "Une erreur s'est produite lors de la recherche de secteur avec id=" + ProfessionSectorId
             });
         });
 };
