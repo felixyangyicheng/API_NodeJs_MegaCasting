@@ -10,7 +10,7 @@ exports.findAll = (req, res) => {
         }
     } : null;
     Offers.findAll({
-            attributes: ["OfferId", "OfferReference"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioName"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
             where: condition
         })
         .then(data => {
@@ -30,7 +30,10 @@ exports.findAllByDuration = (req, res) => {
             [Op.like]: `%${OfferDuration}%`
         }
     } : null;
-    Offers.findAll({ where: condition })
+    Offers.findAll({
+            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioName"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            where: condition
+        })
         .then(data => {
             res.send(data);
         })
@@ -47,7 +50,10 @@ exports.findAllByLocation = (req, res) => {
             [Op.like]: `%${Location}%`
         }
     } : null;
-    Offers.findAll({ where: condition })
+    Offers.findAll({
+            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioName"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            where: condition
+        })
         .then(data => {
             res.send(data);
         })
