@@ -1,12 +1,18 @@
 const db = require("../models");
 const Offers = db.offers;
 const Studios = db.studio;
+const Professions=db.professions;
 const Op = db.Sequelize.Op;
 
-// Studios.hasMany(Offers, {
-//     foreignKey: "StudioId"
-// });
-// Offers.belongsTo(Studios);
+Studios.hasMany(Offers, {
+    foreignKey: "StudioId"
+});
+Offers.belongsTo(Studios);
+
+Professions.hasMany(Offers, {
+    foreignKey: "ProfessionId"
+});
+Offers.belongsTo(Professions);
 
 exports.findAll = (req, res) => {
     const Title = req.query.Title;
@@ -16,7 +22,7 @@ exports.findAll = (req, res) => {
         }
     } : null;
     Offers.findAll({
-            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioId"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioId", "ProfessionId", ], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
             where: condition
         })
         .then(data => {
@@ -37,7 +43,7 @@ exports.findAllByDuration = (req, res) => {
         }
     } : null;
     Offers.findAll({
-            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioId"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioId", "ProfessionId",], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
             where: condition
         })
         .then(data => {
@@ -57,7 +63,7 @@ exports.findAllByLocation = (req, res) => {
         }
     } : null;
     Offers.findAll({
-            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioId"], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioId", "ProfessionId",], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
             where: condition
         })
         .then(data => {
@@ -72,7 +78,9 @@ exports.findAllByLocation = (req, res) => {
 exports.findOne = (req, res) => {
     const OfferId = req.params.OfferId;
 
-    Offers.findByPk(OfferId)
+    Offers.findByPk(OfferId, {
+            attributes: ["OfferId", "OfferReference", "Title", "PublishDate", "OfferDuration", "OfferDescription", "AvailablePlace", "ProfilDescription", "Location", "StudioId", "ProfessionId",], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+        })
         .then(data => {
             res.send(data);
         })
