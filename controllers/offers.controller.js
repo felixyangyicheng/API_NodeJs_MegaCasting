@@ -1,6 +1,6 @@
 const db = require("../models");
 const Offers = db.offers;
-const Studios = db.studio;
+const Studios = db.studios;
 const Professions=db.professions;
 const Op = db.Sequelize.Op;
 
