@@ -1,6 +1,10 @@
 const db = require('../models/');
 const ContractTypes = db.contracttypes;
+const Contracts = db.contracts;
+
 const Op = db.Sequelize.Op;
+
+
 
 exports.findAll = (req, res) => {
     const ContractTypeName = req.query.ContractTypeName;

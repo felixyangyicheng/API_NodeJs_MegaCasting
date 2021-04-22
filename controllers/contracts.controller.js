@@ -1,10 +1,29 @@
 const db = require("../models");
 const Contracts = db.contracts;
+const ContractTypes = db.contracttypes;
 const Op = db.Sequelize.Op;
+
+ContractTypes.hasMany(Contracts, {
+    foreignKey: 'ContractTypeId'
+})
+Contracts.belongsTo(ContractTypes, {
+    as: 'ContractType',
+    foreignKey: 'ContractTypeId'
+})
+
 
 exports.findAll = (req, res) => {
 
-    Contracts.findAll()
+    Contracts.findAll({
+            attributes: ["ContractId", "ContractReference", "ContractBegins", "ContractDuration", "ContractPdfFile", ], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            include: [{
+                    model: ContractTypes,
+                    as: 'ContractType',
+                    attributes: ["ContractTypeName"]
+                },
+
+            ],
+        })
         .then(data => {
             res.send(data);
         })
@@ -22,7 +41,17 @@ exports.findAllByReference = (req, res) => {
             [Op.like]: `%${ContractReference}%`
         }
     } : null
-    Contracts.findAll({ where: condition })
+    Contracts.findAll({
+            attributes: ["ContractId", "ContractReference", "ContractBegins", "ContractDuration", "ContractPdfFile", ], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            where: condition,
+            include: [{
+                    model: ContractTypes,
+                    as: 'CTT',
+                    attributes: ["ContractTypeName"]
+                },
+
+            ],
+        })
         .then(data => {
             res.send(data);
         })
@@ -35,7 +64,16 @@ exports.findAllByReference = (req, res) => {
 exports.findOne = (req, res) => {
     const ContractId = req.params.ContractTypeId;
 
-    Contracts.findByPk(ContractId)
+    Contracts.findByPk(ContractId, {
+            attributes: ["ContractId", "ContractReference", "ContractBegins", "ContractDuration", "ContractPdfFile", ], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
+            include: [{
+                    model: ContractTypes,
+                    as: 'CTT',
+                    attributes: ["ContractTypeName"]
+                },
+
+            ],
+        })
         .then(data => {
             res.send(data);
         })
