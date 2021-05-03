@@ -62,7 +62,7 @@ exports.findAllByReference = (req, res) => {
         });
 };
 exports.findOne = (req, res) => {
-    const ContractId = req.params.ContractTypeId;
+    const ContractId = req.params.ContractId;
 
     Contracts.findByPk(ContractId, {
             attributes: ["ContractId", "ContractReference", "ContractBegins", "ContractDuration", "ContractPdfFile", ], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
