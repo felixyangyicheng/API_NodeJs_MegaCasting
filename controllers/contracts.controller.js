@@ -7,7 +7,7 @@ ContractTypes.hasMany(Contracts, {
     foreignKey: 'ContractTypeId'
 })
 Contracts.belongsTo(ContractTypes, {
-    as: 'ContractType',
+    as: 'CTT',
     foreignKey: 'ContractTypeId'
 })
 
