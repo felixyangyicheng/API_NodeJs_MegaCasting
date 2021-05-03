@@ -18,7 +18,7 @@ exports.findAll = (req, res) => {
             attributes: ["ContractId", "ContractReference", "ContractBegins", "ContractDuration", "ContractPdfFile", ], //set arttibuts (select columns) to avoid concatenation of tableName and columnName
             include: [{
                     model: ContractTypes,
-                    as: 'ContractType',
+                    as: 'CTT',
                     attributes: ["ContractTypeName"]
                 },
 
